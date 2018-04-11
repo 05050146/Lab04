@@ -1,0 +1,31 @@
+void loop() 
+{
+  static unsigned long timer = millis();
+  static int deciSeconds = 0;
+ boolean val=digitalRead(6);
+ if(val==LOW)
+ {
+  static unsigned long timer =millis();
+  static int deciSecond=0;
+  sevseg.setNumber(deciSeconds,0);
+ }
+  
+
+  if (millis() - timer >= 50) {
+    timer += 50;
+    deciSeconds++; 
+    
+    if (deciSeconds%100 == 59) 
+    { 
+      deciSeconds=deciSeconds+41;
+    }
+    else
+    {
+      deciSeconds=deciSeconds+1;
+    }
+   if (deciSeconds == 2400)
+   deciSeconds =0 ;
+  }
+
+  sevseg.refreshDisplay(); // Must run repeatedly
+}
